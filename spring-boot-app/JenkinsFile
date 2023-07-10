@@ -26,18 +26,7 @@ pipeline {
       }
     }
 
-     stage('create eks cluster') {
-     steps {
-       script{
-         dir ('terraform/eks-cluster-ec2') {
-           
-           sh 'terraform fmt'
-           sh 'terraform validate'
-           sh 'terraform plan -out=tfplan'
-           stash includes: 'tfplan', name: 'terraform-plan'
-         }
-       }
-     }
+    
      post {
          success {
              archiveArtifacts artifacts: 'terraform/eks-cluster-ec2/tfplan', onlyIfSuccessful: true
