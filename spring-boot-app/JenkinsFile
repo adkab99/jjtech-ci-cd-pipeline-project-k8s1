@@ -26,11 +26,11 @@ pipeline {
       }
     }
 
-    stage('create eks cluster') {
+     stage('create eks cluster') {
      steps {
        script{
          dir ('terraform/eks-cluster-ec2') {
-           sh 'terraform init'
+           sh 'terraform init -upgrade'
            sh 'terraform fmt'
            sh 'terraform validate'
            sh 'terraform plan -out=tfplan'
